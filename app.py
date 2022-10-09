@@ -9,6 +9,10 @@ def load_lottieurl(url):
         return None
     return r.json()
 
+if "counter" not in st.session_state:
+    st.session_state.counter = 1
+    
+
 # frind more emojis here: https://www.webfx.com/tools/emoji-cheat-sheet/
 st.set_page_config(page_title="JoseRoberto Portfolio", page_icon=":rocket:", layout="wide")
 
