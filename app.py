@@ -1,58 +1,120 @@
 import streamlit as st
-from PIL import Image
 
-# Cargar imágenes
-background_image = Image.open('background_image.jpg')
-profile_image = Image.open('profile_image.jpg')
+def render_english():
+    # Set dark theme
+    st.markdown("""
+        <style>
+        body {
+            color: white;
+            background-color: #1F2937;
+        }
+        </style>
+        """, unsafe_allow_html=True)
 
-# Definir diccionarios para la traducción
-english_dict = {
-    'title': 'Telecommunications Engineer',
-    'desc': 'Data Science, driven by curiosity',
-    'github': 'https://www.github.com/your_username',
-    'linkedin': 'https://www.linkedin.com/in/your_username',
-    'projects': 'Projects'
-}
+    # Background image
+    st.image("background.jpg", use_column_width=True)
 
-french_dict = {
-    'title': 'Ingénieur en télécommunications',
-    'desc': 'Science des données, animé par la curiosité',
-    'github': 'https://www.github.com/your_username',
-    'linkedin': 'https://www.linkedin.com/in/your_username',
-    'projects': 'Projets'
-}
+    # Profile photo and description
+    col1, col2 = st.beta_columns([1, 4])
+    with col1:
+        st.image("profile.jpg", width=150)
+    with col2:
+        st.title("Your Name")
+        st.subheader("Telecommunications Engineer, Data Science")
+        st.markdown("[GitHub](https://github.com/your-github) [LinkedIn](https://linkedin.com/in/your-linkedin)")
 
-spanish_dict = {
-    'title': 'Ingeniero de Telecomunicaciones',
-    'desc': 'Ciencia de Datos, movido por la curiosidad',
-    'github': 'https://www.github.com/your_username',
-    'linkedin': 'https://www.linkedin.com/in/your_username',
-    'projects': 'Proyectos'
-}
+    # Links to other pages
+    st.subheader("Visualizations")
+    col3, col4, col5 = st.beta_columns(3)
+    with col3:
+        st.image("image1.jpg", use_column_width=True)
+        st.markdown("[Visualization 1](/page1)")
+    with col4:
+        st.image("image2.jpg", use_column_width=True)
+        st.markdown("[Visualization 2](/page2)")
+    with col5:
+        st.image("image3.jpg", use_column_width=True)
+        st.markdown("[Visualization 3](/page3)")
 
-# Opción de idioma
-language_option = st.sidebar.selectbox('Language', options=['English', 'Français', 'Español'])
+def render_french():
+    # Set dark theme
+    st.markdown("""
+        <style>
+        body {
+            color: white;
+            background-color: #1F2937;
+        }
+        </style>
+        """, unsafe_allow_html=True)
 
-if language_option == 'English':
-    lang_dict = english_dict
-elif language_option == 'Français':
-    lang_dict = french_dict
-else:
-    lang_dict = spanish_dict
+    # Background image
+    st.image("background.jpg", use_column_width=True)
 
-# Página de inicio
-st.title(lang_dict['title'])
-st.image(profile_image, use_column_width=True)
-st.write(lang_dict['desc'])
-st.markdown(f"[Github]({lang_dict['github']})")
-st.markdown(f"[LinkedIn]({lang_dict['linkedin']})")
+    # Profile photo and description
+    col1, col2 = st.beta_columns([1, 4])
+    with col1:
+        st.image("profile.jpg", width=150)
+    with col2:
+        st.title("Votre Nom")
+        st.subheader("Ingénieur en Télécommunications, Data Science")
+        st.markdown("[GitHub](https://github.com/votre-github) [LinkedIn](https://linkedin.com/in/votre-linkedin)")
 
-# Proyectos
-st.header(lang_dict['projects'])
-project_images = ['project1.jpg', 'project2.jpg', 'project3.jpg', 'project4.jpg', 'project5.jpg', 'project6.jpg']
-project_links = ['project1_link', 'project2_link', 'project3_link', 'project4_link', 'project5_link', 'project6_link']
+    # Links to other pages
+    st.subheader("Visualisations")
+    col3, col4, col5 = st.beta_columns(3)
+    with col3:
+        st.image("image1.jpg", use_column_width=True)
+        st.markdown("[Visualisation 1](/page1)")
+    with col4:
+        st.image("image2.jpg", use_column_width=True)
+        st.markdown("[Visualisation 2](/page2)")
+    with col5:
+        st.image("image3.jpg", use_column_width=True)
+        st.markdown("[Visualisation 3](/page3)")
 
-for i in range(len(project_images)):
-    if st.button(lang_dict['projects'] + str(i+1)):
-        st.image(project_images[i])
-        st.markdown(project_links[i])
+def render_spanish():
+    # Set dark theme
+    st.markdown("""
+        <style>
+        body {
+            color: white;
+            background-color: #1F2937;
+        }
+        </style>
+        """, unsafe_allow_html=True)
+
+    # Background image
+    st.image("background.jpg", use_column_width=True)
+
+    # Profile photo and description
+    col1, col2 = st.beta_columns([1, 4])
+    with col1:
+        st.image("profile.jpg", width=150)
+    with col2:
+        st.title("Tu Nombre")
+        st.subheader("Ingeniero de Telecomunicaciones, Data Science")
+        st.markdown("[GitHub](https://github.com/tu-github) [LinkedIn](https://linkedin.com/in/tu-linkedin)")
+
+    # Links to other pages
+    st.subheader("Visualizaciones")
+    col3, col4, col5 = st.beta_columns(3)
+    with col3:
+        st.image("image1.jpg", use_column_width=True)
+        st.markdown("[Visualización 1](/page1)")
+    with col4:
+        st.image("image2.jpg", use_column_width=True)
+        st.markdown("[Visualización 2](/page2)")
+    with col5:
+        st.image("image3.jpg", use_column_width=True)
+        st.markdown("[Visualización 3](/page3)")
+
+# Language selection
+language = st.sidebar.selectbox("Language", ["English", "Français", "Español"])
+
+# Render page based on selected language
+if language == "English":
+    render_english()
+elif language == "Français":
+    render_french()
+elif language == "Español":
+    render_spanish()
