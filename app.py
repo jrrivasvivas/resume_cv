@@ -1,49 +1,58 @@
 import streamlit as st
-import requests
-from streamlit_lottie import st_lottie
 from PIL import Image
 
-def load_lottieurl(url):
-    r = requests.get(url)
-    if r.status_code != 200:
-        return None
-    return r.json()
+# Cargar imágenes
+background_image = Image.open('background_image.jpg')
+profile_image = Image.open('profile_image.jpg')
 
-if "counter" not in st.session_state:
-    st.session_state.counter = 1
-    
+# Definir diccionarios para la traducción
+english_dict = {
+    'title': 'Telecommunications Engineer',
+    'desc': 'Data Science, driven by curiosity',
+    'github': 'https://www.github.com/your_username',
+    'linkedin': 'https://www.linkedin.com/in/your_username',
+    'projects': 'Projects'
+}
 
-# frind more emojis here: https://www.webfx.com/tools/emoji-cheat-sheet/
-st.set_page_config(page_title="JoseRoberto Portfolio", page_icon=":rocket:", layout="wide")
+french_dict = {
+    'title': 'Ingénieur en télécommunications',
+    'desc': 'Science des données, animé par la curiosité',
+    'github': 'https://www.github.com/your_username',
+    'linkedin': 'https://www.linkedin.com/in/your_username',
+    'projects': 'Projets'
+}
 
+spanish_dict = {
+    'title': 'Ingeniero de Telecomunicaciones',
+    'desc': 'Ciencia de Datos, movido por la curiosidad',
+    'github': 'https://www.github.com/your_username',
+    'linkedin': 'https://www.linkedin.com/in/your_username',
+    'projects': 'Proyectos'
+}
 
-lottie_coding = load_lottieurl("https://assets2.lottiefiles.com/packages/lf20_3rwasyjy.json")
+# Opción de idioma
+language_option = st.sidebar.selectbox('Language', options=['English', 'Français', 'Español'])
 
+if language_option == 'English':
+    lang_dict = english_dict
+elif language_option == 'Français':
+    lang_dict = french_dict
+else:
+    lang_dict = spanish_dict
 
-# ---- Header Section ------
-with st.container():
-    st.subheader("Hi, I am Jose Roberto :wave:")
-    st.title("A Data Analayst from Venezuela" )
+# Página de inicio
+st.title(lang_dict['title'])
+st.image(profile_image, use_column_width=True)
+st.write(lang_dict['desc'])
+st.markdown(f"[Github]({lang_dict['github']})")
+st.markdown(f"[LinkedIn]({lang_dict['linkedin']})")
 
-    st.write("I am passionate about finding ways to use Python and VBA to be more efficience.")
+# Proyectos
+st.header(lang_dict['projects'])
+project_images = ['project1.jpg', 'project2.jpg', 'project3.jpg', 'project4.jpg', 'project5.jpg', 'project6.jpg']
+project_links = ['project1_link', 'project2_link', 'project3_link', 'project4_link', 'project5_link', 'project6_link']
 
-#--- What i do ---
-with st.container():
-    st.write("---")
-    left_column, right_column = st.columns(2)
-    with left_column:
-        st.header("What I do")
-        st.write("##")
-        st.write(
-            """
-            - Provided quantitative analyses using multiples data sets to understand business questions and problems.
-
-            - Designed a data model to classify the maintenance of radio bases stations according to historical consumption.
-
-            - Designed data processes and deployment solutions to provide AI and ML insights to the Network Operation Center. 
-
-            - Coached data team through short and long-term projects on how to improve their storytelling and streamline visualizations.
-            """
-        )
-    with right_column:
-        st_lottie(lottie_coding, height=300, key="coding")
+for i in range(len(project_images)):
+    if st.button(lang_dict['projects'] + str(i+1)):
+        st.image(project_images[i])
+        st.markdown(project_links[i])
